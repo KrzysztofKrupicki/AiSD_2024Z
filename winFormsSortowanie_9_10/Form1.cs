@@ -25,10 +25,10 @@ namespace program
 
         static string TabToString(int[] tab)
         {
-            if (tab != null) 
-			{
-				return string.Join(",", tab);
-			}
+            if (tab != null)
+            {
+                return string.Join(",", tab);
+            }
             else
             {
                 MessageBox.Show("Tablica nie istnieje.");
@@ -65,10 +65,10 @@ namespace program
             {
                 for (int j = 0; j < n - i - 1; j++)
                 {
-                    if (sortedArray[j] > sortedArray[j + 1]) 
-					{
-						(sortedArray[j + 1], sortedArray[j]) = (sortedArray[j], sortedArray[j + 1]);
-					}
+                    if (sortedArray[j] > sortedArray[j + 1])
+                    {
+                        (sortedArray[j + 1], sortedArray[j]) = (sortedArray[j], sortedArray[j + 1]);
+                    }
                 }
             }
             return sortedArray;
@@ -83,10 +83,10 @@ namespace program
                 var sortedArray = BubbleSort((int[])tab.Clone());
                 sw.Stop();
                 var result = TabToString(sortedArray);
-                if (sortedArray.Length < 16) 
-				{
-					inputResultOfSorting.Text = result;
-				}
+                if (sortedArray.Length < 16)
+                {
+                    inputResultOfSorting.Text = result;
+                }
                 else
                 {
                     var displayResult = sortedArray.Take(15).ToArray();
@@ -94,10 +94,10 @@ namespace program
                 }
                 labelSortingTime.Text = "Czas sortowania: " + sw.ElapsedMilliseconds + " ms";
             }
-            else 
-			{
-				MessageBox.Show("Tablica nie istnieje.");
-			}
+            else
+            {
+                MessageBox.Show("Tablica nie istnieje.");
+            }
         }
 
         int[] InsertionSort(int[] tab)
@@ -127,10 +127,10 @@ namespace program
                 var sortedArray = InsertionSort((int[])tab.Clone());
                 sw.Stop();
                 var result = TabToString(sortedArray);
-                if (sortedArray.Length < 16) 
-				{
-					inputResultOfSorting.Text = result;
-				}
+                if (sortedArray.Length < 16)
+                {
+                    inputResultOfSorting.Text = result;
+                }
                 else
                 {
                     var displayResult = sortedArray.Take(15).ToArray();
@@ -138,10 +138,10 @@ namespace program
                 }
                 labelSortingTime.Text = "Czas sortowania: " + sw.ElapsedMilliseconds + " ms";
             }
-            else 
-			{
-				MessageBox.Show("Tablica nie istnieje.");
-			}
+            else
+            {
+                MessageBox.Show("Tablica nie istnieje.");
+            }
         }
         int[] MergeSort(int[] tab)
         {
@@ -162,24 +162,24 @@ namespace program
 
             while (i < left.Length && j < right.Length)
             {
-                if (left[i] <= right[j]) 
-				{
-					result[k++] = left[i++];
-				}
-                else 
-				{
-					result[k++] = right[j++];
-				}
+                if (left[i] <= right[j])
+                {
+                    result[k++] = left[i++];
+                }
+                else
+                {
+                    result[k++] = right[j++];
+                }
             }
 
-            while (i < left.Length) 
-			{
-				result[k++] = left[i++];
-			}
-            while (j < right.Length) 
-			{
-				result[k++] = right[j++];
-			}
+            while (i < left.Length)
+            {
+                result[k++] = left[i++];
+            }
+            while (j < right.Length)
+            {
+                result[k++] = right[j++];
+            }
             return result;
         }
 
@@ -192,10 +192,10 @@ namespace program
                 var sortedArray = MergeSort((int[])tab.Clone());
                 sw.Stop();
                 var result = TabToString(sortedArray);
-                if (sortedArray.Length < 16) 
-				{
-					inputResultOfSorting.Text = result;
-				}
+                if (sortedArray.Length < 16)
+                {
+                    inputResultOfSorting.Text = result;
+                }
                 else
                 {
                     var displayResult = sortedArray.Take(15).ToArray();
@@ -203,10 +203,10 @@ namespace program
                 }
                 labelSortingTime.Text = "Czas sortowania: " + sw.ElapsedMilliseconds + " ms";
             }
-            else 
-			{
-				MessageBox.Show("Tablica nie istnieje.");
-			}
+            else
+            {
+                MessageBox.Show("Tablica nie istnieje.");
+            }
         }
 
         int[] QuickSort(int[] tab, int left, int right)
@@ -247,20 +247,21 @@ namespace program
                 var sortedArray = QuickSort((int[])tab.Clone(), 0, tab.Length - 1);
                 sw.Stop();
                 var result = TabToString(sortedArray);
-                if (sortedArray.Length < 16) 
-				{
-					inputResultOfSorting.Text = result;
-				}
-                else {
+                if (sortedArray.Length < 16)
+                {
+                    inputResultOfSorting.Text = result;
+                }
+                else
+                {
                     var displayResult = sortedArray.Take(15).ToArray();
                     inputResultOfSorting.Text = TabToString(displayResult);
                 }
                 labelSortingTime.Text = "Czas sortowania: " + sw.ElapsedMilliseconds + " ms";
             }
-            else 
-			{
-				MessageBox.Show("Tablica nie istnieje.");
-			}
+            else
+            {
+                MessageBox.Show("Tablica nie istnieje.");
+            }
         }
     }
 }

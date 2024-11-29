@@ -37,9 +37,15 @@ namespace grafy_20_11
             f.DodajSasiada(g);
 
             g.DodajSasiada(f);
-            
+
+            List<NodeG> lista = new List<NodeG>(a.PrzechodzenieWglab(a));
+            foreach (var x in lista)
+            {
+                Console.Write(x + " ");
+            }
+			Console.WriteLine();
             List<NodeG> lista = new List<NodeG>(a.PrzechodzenieWSzerz(a));
-            foreach(var x in lista)
+            foreach (var x in lista)
             {
                 Console.Write(x + " ");
             }

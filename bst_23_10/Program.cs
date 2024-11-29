@@ -34,8 +34,6 @@ namespace bst_23_10
             myTree.Remove(3);
             Console.WriteLine("Drzewo po usunięciu 3");
             myTree.PrintTree(myTree.root);
-
-
         }
     }
 }

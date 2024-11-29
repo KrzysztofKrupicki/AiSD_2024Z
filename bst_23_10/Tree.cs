@@ -187,6 +187,7 @@ namespace bst_23_10
             Console.Write(nodet.data + " -> ");
         }
 
+        // chatGPT - wizualizacja drzewa
         public void PrintTree(NodeT node, string prefix = "", bool isLeft = true)
         {
             if (node == null)

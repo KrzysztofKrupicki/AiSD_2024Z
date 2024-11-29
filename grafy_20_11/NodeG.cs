@@ -89,17 +89,5 @@ namespace grafy_20_11
             }
             return listaOdwiedzonych;
         }
-
-
-        // przechodzenie w glab
-        // A B E F D C G
-
-        // przechodzenei w wszerz
-        // A(BC)
-        // A B(ADE) C(ADF)
-        // A B C(ADF) D(BCF) E(BF)
-        // A B C D(BCF) E(BF) F(CDEG)
-        // A B C D E(BF) F(CDEG)
-        // A B C D E F(CDEG) G(F)
     }
 }

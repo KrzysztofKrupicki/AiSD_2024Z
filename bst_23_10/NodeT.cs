@@ -18,14 +18,14 @@
         public int GetLiczbaDzieci()
         {
             int wynik = 0;
-            if (this.left != null) 
-			{
-				wynik++;
-			}
-            if (this.right != null) 
-			{
-				wynik++;
-			}
+            if (this.left != null)
+            {
+                wynik++;
+            }
+            if (this.right != null)
+            {
+                wynik++;
+            }
             return wynik;
         }
     }
