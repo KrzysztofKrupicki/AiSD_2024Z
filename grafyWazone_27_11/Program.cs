@@ -68,7 +68,7 @@
         };
             GrafW g1 = new GrafW(nodes, edges);
             var wynik = g1.Kruskal();
-            Console.WriteLine("\nWynik");
+            Console.WriteLine("Wynik");
             foreach(var edge in wynik.edges)
             {
                 Console.WriteLine(edge.start.data + "-" + edge.end.data + ": " + edge.weight);

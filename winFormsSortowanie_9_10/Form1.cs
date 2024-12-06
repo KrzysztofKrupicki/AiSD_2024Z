@@ -227,7 +227,7 @@ namespace program
 
             for (int j = left; j < right; j++)
             {
-                if (tab[j] <= pivot)
+                if (tab[j] < pivot)
                 {
                     i++;
                     (tab[i], tab[j]) = (tab[j], tab[i]);
