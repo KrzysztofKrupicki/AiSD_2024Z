@@ -89,6 +89,7 @@ namespace grafyWazone_27_11
         public GrafW Kruskal()
         {
             GrafW mst = new GrafW();
+            edges = edges.OrderBy(k => k.weight).ToList();
             foreach (var e in edges)
             {
                 mst.AddEdge(e);
@@ -154,5 +155,75 @@ namespace grafyWazone_27_11
         // Przypadek nr 3 - 1 krawedz i 0 wezel = cykl
         // Przypadek nr 4 - 1 krawedz i 0 wezel = g spojny + g spojny = g spojny
         // tylko gdy pracujemy na grafie niespojnym, nie mozna odpuscic do takiej sytuacji, wtedy nie bedzie przypadku 4
+
+
+
+        // Algrotym Djikstry
+        // 0-1: 3
+        // 0-4: 3
+        // 1-2: 1
+        // 2-3: 3
+        // 2-5: 1
+        // 3-1: 3
+        // 4-5: 2
+        // 5-3: 1
+
+        // w |  0  |  1  |  2  |  3  |  4  |  5
+        // d |  0  |  3  | inf | inf |  3  | inf
+        // p | -1  |  0  | -1  |  -1 |  0  | -1
+        //      ^
+        // s = {0, 
+
+        // w |  0  |  1  |  2    |  3  |  4  |  5
+        // d |  0  |  3  |  3+1  | inf |  3  | inf
+        // p |  -1 |  0  |  1    |  -1 |  0  | -1
+        //      x     ^
+        // s = {0, 1, 
+
+        // w |  0  |  1  |  2    |  3  |  4  |  5
+        // d |  0  |  3  |  3+1  | inf |  3  | 3+2
+        // p |  -1 |  0  |  1    |  -1 |  0  |  4
+        //       x    x                   ^
+        // s = {0, 1, 4
+
+        // w |  0  |  1  |  2    |   3   |  4  |  5
+        // d |  0  |  3  |  3+1  | 3+1+3 |  3  | 3+2
+        // p |  -1 |  0  |  1    |   2   |  0  |  4
+        //       x    x     ^             x
+        // s = {0, 1, 4, 2
+
+        // w |  0  |  1  |  2    |   3   |  4  |  5
+        // d |  0  |  3  |  3+1  | 3+1+1 |  3  | 3+2
+        // p |  -1 |  0  |  1    |   5   |  0  |  4
+        //       x    x     x               x     ^
+        // s = {0, 1, 4, 2, 5
+
+        // w |  0  |  1  |  2    |   3   |  4  |  5
+        // d |  0  |  3  |  3+1  | 3+1+1 |  3  | 3+2
+        // p |  -1 |  0  |  1    |   5   |  0  |  4
+        //       x    x     x        ^       x     x
+        // s = {0, 1, 4, 2, 5, 3
+
+        // w |  0  |  1  |  2    |   3   |  4  |  5
+        // d |  0  |  3  |  3+1  | 3+1+1 |  3  | 3+2
+        // p |  -1 |  0  |  1    |   5   |  0  |  4
+        //       x    x     x        x      x     x
+        // s = {0, 1, 4, 2, 5, 3}
+
+
+        // klasa element
+        // nodegw wezel
+        // int dystans
+        // nodegw poprzednik
+        public List<Element> AlgorytmDjikstry(NodeGW elementStartowy)
+        {
+            var tabelka = PrzygotujTabele(elementStartowy);
+            var zbiorS = new List<NodeGW>();
+            var kandydaci = tabelka.Where(e => !zbiorS.Contains(e.wezel));
+            var kandydat = kandydaci.OrderBy(e => e.dystans).First();
+            var sasiedzi = edges.Where(k => k.start) == kandydat.wezel).ToList();
+        }
+
+        // infinity = int.MaxValue
     }
 }
