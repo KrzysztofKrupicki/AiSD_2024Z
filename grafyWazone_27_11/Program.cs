@@ -68,11 +68,38 @@
         };
             GrafW g1 = new GrafW(nodes, edges);
             var wynik = g1.Kruskal();
-            Console.WriteLine("Wynik");
-            foreach(var edge in wynik.edges)
+            Console.WriteLine("Kruskal:");
+            foreach (var edge in wynik.edges)
             {
                 Console.WriteLine(edge.start.data + "-" + edge.end.data + ": " + edge.weight);
             }
+
+
+
+            List<NodeGW> nodesD = new List<NodeGW>
+        {
+            new NodeGW(0),
+            new NodeGW(1),
+            new NodeGW(2),
+            new NodeGW(3),
+            new NodeGW(4),
+            new NodeGW(5)
+        };
+            List<Edge> edgesD = new List<Edge>
+        {
+            new Edge(nodesD[0], nodesD[1], 3),
+            new Edge(nodesD[0], nodesD[4], 3),
+            new Edge(nodesD[1], nodesD[2], 1),
+            new Edge(nodesD[2], nodesD[3], 3),
+            new Edge(nodesD[2], nodesD[5], 1),
+            new Edge(nodesD[3], nodesD[1], 3),
+            new Edge(nodesD[4], nodesD[5], 2),
+            new Edge(nodesD[5], nodesD[3], 1)
+        };
+            GrafW g2 = new GrafW(nodesD, edgesD);
+            var wynik2 = g2.AlgorytmDjikstry(nodesD[0]);
+            Console.WriteLine("\nDjikstra:");
+            g2.WyswietlTabele(wynik2);
         }
     }
 }

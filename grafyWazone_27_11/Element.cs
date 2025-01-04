@@ -1,9 +1,16 @@
 ﻿namespace grafyWazone_27_11
 {
-    public class Element
+    internal class Element
     {
-        NodeGW wezel;
-        int dystans;
-        NodeGW poprzednik;
+        public NodeGW wezel;
+        public int dystans;
+        public NodeGW poprzednik;
+
+        public Element(NodeGW wezel, int dystans, NodeGW poprzednik)
+        {
+            this.wezel = wezel;
+            this.dystans = dystans;
+            this.poprzednik = poprzednik;
+        }
     }
 }

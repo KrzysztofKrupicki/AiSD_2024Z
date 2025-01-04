@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace grafyWazone_27_11
+﻿namespace grafyWazone_27_11
 {
     internal class GrafW
     {
@@ -13,10 +11,7 @@ namespace grafyWazone_27_11
             this.edges = edges;
         }
 
-        public GrafW()
-        {
-
-        }
+        public GrafW() { }
         public GrafW(Edge e)
         {
             edges.Add(e);
@@ -168,6 +163,18 @@ namespace grafyWazone_27_11
         // 4-5: 2
         // 5-3: 1
 
+        // w |  0  |   1   |  2  |  3  |   4   |  5
+        // d |  0  |  inf  | inf | inf |  inf  | inf
+        // p | -1  |  -1   | -1  |  -1 |  -1   | -1
+        //      
+        // s = { 
+
+        // w |  0  |  1  |  2  |  3  |   4   |  5
+        // d |  0  |  3  | inf | inf |  inf  | inf
+        // p | -1  |  0  | -1  |  -1 |   0   | -1
+        //      ^
+        // s = {0, 
+
         // w |  0  |  1  |  2  |  3  |  4  |  5
         // d |  0  |  3  | inf | inf |  3  | inf
         // p | -1  |  0  | -1  |  -1 |  0  | -1
@@ -193,37 +200,87 @@ namespace grafyWazone_27_11
         // s = {0, 1, 4, 2
 
         // w |  0  |  1  |  2    |   3   |  4  |  5
-        // d |  0  |  3  |  3+1  | 3+1+1 |  3  | 3+2
-        // p |  -1 |  0  |  1    |   5   |  0  |  4
+        // d |  0  |  3  |  3+1  | 3+1+3 |  3  | 3+2
+        // p |  -1 |  0  |  1    |   2   |  0  |  4
         //       x    x     x               x     ^
         // s = {0, 1, 4, 2, 5
 
         // w |  0  |  1  |  2    |   3   |  4  |  5
-        // d |  0  |  3  |  3+1  | 3+1+1 |  3  | 3+2
+        // d |  0  |  3  |  3+1  | 3+2+1 |  3  | 3+2
         // p |  -1 |  0  |  1    |   5   |  0  |  4
         //       x    x     x        ^       x     x
         // s = {0, 1, 4, 2, 5, 3
 
         // w |  0  |  1  |  2    |   3   |  4  |  5
-        // d |  0  |  3  |  3+1  | 3+1+1 |  3  | 3+2
+        // d |  0  |  3  |  3+1  | 3+2+1 |  3  | 3+2
         // p |  -1 |  0  |  1    |   5   |  0  |  4
         //       x    x     x        x      x     x
         // s = {0, 1, 4, 2, 5, 3}
 
-
-        // klasa element
-        // nodegw wezel
-        // int dystans
-        // nodegw poprzednik
         public List<Element> AlgorytmDjikstry(NodeGW elementStartowy)
         {
             var tabelka = PrzygotujTabele(elementStartowy);
             var zbiorS = new List<NodeGW>();
-            var kandydaci = tabelka.Where(e => !zbiorS.Contains(e.wezel));
-            var kandydat = kandydaci.OrderBy(e => e.dystans).First();
-            var sasiedzi = edges.Where(k => k.start) == kandydat.wezel).ToList();
+            while (zbiorS.Count < tabelka.Count)
+            {
+                var kandydaci = tabelka.Where(e => !zbiorS.Contains(e.wezel));
+                var kandydat = kandydaci.OrderBy(e => e.dystans).First();
+                zbiorS.Add(kandydat.wezel);
+                var sasiedzi = edges.Where(k => k.start == kandydat.wezel).ToList();
+                foreach (var sasiad in sasiedzi)
+                {
+                    var elementSasiada = tabelka.First(e => e.wezel == sasiad.end);
+                    int nowyDystans = kandydat.dystans + sasiad.weight;
+                    if (nowyDystans < elementSasiada.dystans)
+                    {
+                        elementSasiada.dystans = nowyDystans;
+                        elementSasiada.poprzednik = kandydat.wezel;
+                    }
+                    Console.WriteLine("Po\n" +
+                        "Wezel\tDystans\tPoprzednik");
+                    foreach (var element in tabelka)
+                    {
+                        int poprzednik = -1;
+                        if (element.poprzednik != null)
+                        {
+                            poprzednik = element.poprzednik.data;
+                        }
+
+                        Console.WriteLine($"{element.wezel.data}\t{element.dystans}\t{poprzednik}");
+                    }
+                }
+            }
+            return tabelka;
         }
 
-        // infinity = int.MaxValue
+        public List<Element> PrzygotujTabele(NodeGW elementStartowy)
+        {
+            var tabelka = new List<Element>();
+            foreach (var wezel in nodes)
+            {
+                int dystans = int.MaxValue;
+                if (wezel == elementStartowy)
+                {
+                    dystans = 0;
+                }
+                tabelka.Add(new Element(wezel, dystans, null));
+            }
+            return tabelka;
+        }
+
+        public void WyswietlTabele(List<Element> tabelka)
+        {
+            Console.WriteLine("Wezel\tDystans\tPoprzednik");
+            foreach (var element in tabelka)
+            {
+                int poprzednik = -1;
+                if (element.poprzednik != null)
+                {
+                    poprzednik = element.poprzednik.data;
+                }
+
+                Console.WriteLine($"{element.wezel.data}\t{element.dystans}\t{poprzednik}");
+            }
+        }
     }
 }
