@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace bst_23_10
+﻿namespace bst_23_10
 {
     internal class Tree
     {
